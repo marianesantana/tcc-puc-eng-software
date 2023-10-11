@@ -14,3 +14,5 @@ data class Exame(
     val imagem: String,
     val medicoResponsavel: MutableList<Medico>,
 )
+
+data class ExameList(val exames: MutableList<Exame>)

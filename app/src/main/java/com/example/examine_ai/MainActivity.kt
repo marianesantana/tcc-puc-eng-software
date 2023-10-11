@@ -9,22 +9,24 @@ import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.example.examine_ai.domain.services.exames.ExamesViewModel
+import com.example.examine_ai.domain.utils.Destinos
 import com.example.examine_ai.ui.components.Spinner
 import com.example.examine_ai.ui.presentation.users.AuthenticationState
 import com.example.examine_ai.ui.presentation.users.UserViewModel
+import com.example.examine_ai.ui.screens.ExameDetailScreen
 import com.example.examine_ai.ui.screens.ExamesScreen
 import com.example.examine_ai.ui.screens.LoginScreen
 import com.example.examine_ai.ui.screens.NoLoggedHomeScreen
-
 import com.example.examine_ai.ui.themes.AppTheme
 
 fun shouldShowMenu(loginResult: AuthenticationState?): Boolean {
@@ -64,7 +66,15 @@ fun MainNavigation() {
                 composable("home") { HomeScreen() }
                 composable("homeNL") { NoLoggedHomeScreen(userViewModel) }
                 composable("spinner") { Spinner(false, navController) }
-                composable("exames") { ExamesScreen(examesViewModel) }
+                composable("${Destinos.LISTA_EXAMES}") { ExamesScreen(examesViewModel) }
+                composable(Destinos.DETALHES_EXAME, arguments = listOf(navArgument(Destinos.Argumentos.EXAME_ID) {
+                    type = NavType.IntType
+                })) { backStackEntry ->
+                    val exameId = backStackEntry.arguments?.getInt(Destinos.Argumentos.EXAME_ID)
+                    exameId?.let {
+                        ExameDetailScreen(it)
+                    }
+                }
 
             }
         }

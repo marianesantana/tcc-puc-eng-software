@@ -11,6 +11,10 @@ interface ExameDao {
     @Query("SELECT * FROM exame")
     fun getAllExames(): LiveData<MutableList<Exame>>
 
+    @Query("SELECT * FROM exame WHERE id = :exameId")
+    fun getExameById(exameId: Int): Exame?
+
+
     @Insert
     suspend fun insert(exame: Exame)
 
