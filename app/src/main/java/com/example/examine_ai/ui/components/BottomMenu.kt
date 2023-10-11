@@ -1,20 +1,20 @@
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.examine_ai.R
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.example.examine_ai.domain.utils.Destinos
 
 
 @Composable
@@ -48,7 +48,7 @@ fun BottomMenu(navController: NavController) {
                 selected = selectedItem == 1,
                 onClick = {
                     selectedItem = 1
-                    navController.navigate("exames")
+                    navController.navigate(Destinos.LISTA_EXAMES)
                 }
             )
             BottomNavigationItem(

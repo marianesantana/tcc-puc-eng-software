@@ -2,11 +2,9 @@ package com.example.examine_ai.ui.screens
 
 import android.annotation.SuppressLint
 import android.util.Log
-import android.widget.DatePicker
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
@@ -24,16 +22,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LiveData
-import com.example.examine_ai.data.model.Diagnostico
 import com.example.examine_ai.data.model.Exame
 import com.example.examine_ai.data.model.Medico
 import com.example.examine_ai.data.model.TipoExame
 import com.example.examine_ai.domain.services.exames.ExamesViewModel
 import com.example.examine_ai.ui.components.DatePickerComponent
 import com.example.examine_ai.ui.components.ExameList
+import com.example.examine_ai.ui.themes.CustomColors
 import java.util.Date
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -53,16 +49,9 @@ fun ExamesScreen(examesViewModel: ExamesViewModel){
         },
         content = {
             Column(
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier.padding(16.dp).background(CustomColors.surface).fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Button(
-                    onClick = { isAddingExame = true },
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(text = "Adicionar Exame")
-                }
-
                 if (isAddingExame) {
                     ExamesForm(onExameSubmit = {
                         examesViewModel.insert(it)
@@ -71,7 +60,14 @@ fun ExamesScreen(examesViewModel: ExamesViewModel){
                     })
 
                 }
-            ExameList(exames = exames)
+                ExameList(exames = exames)
+
+                Button(
+                    onClick = { isAddingExame = true },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "Adicionar Exame")
+                }
             }
 
 
@@ -121,7 +117,7 @@ fun ExamesForm(onExameSubmit: (Exame) -> Unit
         Button(
             onClick = {
                 val newExame = Exame(
-                    id = 0, // Defina o ID conforme necessário
+                    id = 0,
                     tipo = mutableListOf(TipoExame(nome = tipoExame, descrição = "", id = 1)),
                     data = dataExame,
                     diagnostico = mutableListOf(),
