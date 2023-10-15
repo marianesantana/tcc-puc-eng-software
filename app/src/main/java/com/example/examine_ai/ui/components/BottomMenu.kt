@@ -2,6 +2,8 @@
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -31,17 +33,22 @@ fun BottomMenu(navController: NavController) {
             BottomNavigationItem(
                 icon = {
                     Icon(
-                        painterResource(id = R.drawable.ic_home),
+                        Icons.Filled.Home,
+                        tint = Color.Black,
                         contentDescription = "Home"
                     )
                 },
                 selected = selectedItem == 0,
-                onClick = { selectedItem = 0 }
+                onClick = {
+                    selectedItem = 0
+                    navController.navigate(Destinos.HOME)
+
+                }
             )
             BottomNavigationItem(
                 icon = {
                     Icon(
-                        painterResource(id = R.drawable.ic_exames),
+                        painterResource(id = R.drawable.baseline_text_snippet_24),
                         contentDescription = null
                     )
                 },
@@ -54,7 +61,7 @@ fun BottomMenu(navController: NavController) {
             BottomNavigationItem(
                 icon = {
                     Icon(
-                        painterResource(id = R.drawable.ic_consultas),
+                        painterResource(id = R.drawable.baseline_date_range_24),
                         contentDescription = null
                     )
                 },
@@ -64,7 +71,7 @@ fun BottomMenu(navController: NavController) {
             BottomNavigationItem(
                 icon = {
                     Icon(
-                        painterResource(id = R.drawable.ic_historico),
+                        painterResource(id = R.drawable.baseline_person_24),
                         contentDescription = null
                     )
                 },

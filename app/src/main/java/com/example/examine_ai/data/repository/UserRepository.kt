@@ -10,4 +10,7 @@ class UserRepository(private val userDao: UserDao) {
     suspend fun register(user: User) {
         return userDao.insertUser(user)
     }
+    suspend fun getUserById(id: Int): User? {
+        return userDao.getUserById(id)
+    }
 }

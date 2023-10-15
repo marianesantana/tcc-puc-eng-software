@@ -8,7 +8,7 @@ import com.example.examine_ai.domain.repository.ExamesRepository
 class ExamesRepositoryImpl(
     private val examesDao: ExameDao,
     ): ExamesRepository {
-    override fun getExames(exame: Exame): LiveData<MutableList<Exame>> {
+    override suspend fun getExames(exame: Exame): LiveData<MutableList<Exame>> {
         return examesDao.getAllExames()
 
     }

@@ -1,5 +1,6 @@
 package com.example.examine_ai.ui.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,19 +22,25 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.examine_ai.R
 import com.example.examine_ai.data.model.Exame
+import com.example.examine_ai.domain.services.exames.ExamesViewModel
+import com.example.examine_ai.domain.utils.dateFormatter
 
 @Composable
-fun ExameItem(exame: Exame){
-    val navigation = rememberNavController()
+fun ExameItem(exame: Exame, navController: NavController){
+    val examesViewModel: ExamesViewModel = viewModel()
+
+    Log.d("Exame Data: ", exame.toString())
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
             .clickable {
-                navigation.navigate("exame/${exame.id}")
+                navController.navigate("exame/${exame.id}")
             },
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -48,9 +55,16 @@ fun ExameItem(exame: Exame){
 
         Spacer(modifier = Modifier.width(16.dp))
 
+
         Column {
-            Text("${exame.medicoResponsavel}", fontWeight = FontWeight.Bold, fontSize = 16.sp)
-            Text("${exame.diagnostico}", fontSize = 14.sp)
+            Text(text = "Exame: ", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text(text = "${exame.tipo?.nome}", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            Text(dateFormatter(exame.data), fontWeight = FontWeight.Bold, fontSize = 16.sp)
+//            Text(exame.medicoResponsavel, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+
+//            Text("${exame?.diagnostico?.get(0)?.descricao}", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+
         }
     }
 }
+

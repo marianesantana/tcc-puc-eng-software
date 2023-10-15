@@ -9,10 +9,10 @@ import com.example.examine_ai.data.model.Exame
 @Dao
 interface ExameDao {
     @Query("SELECT * FROM exame")
-    fun getAllExames(): LiveData<MutableList<Exame>>
+     fun getAllExames(): LiveData<MutableList<Exame>>
 
     @Query("SELECT * FROM exame WHERE id = :exameId")
-    fun getExameById(exameId: Int): Exame?
+    suspend fun getExameById(exameId: Int): Exame?
 
 
     @Insert

@@ -8,5 +8,4 @@ data class TipoExame(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val nome: String,        // Nome do tipo de exame (ex.: "Radiografia", "Exame de Sangue")
-    val descrição: String
 )

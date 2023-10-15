@@ -1,7 +1,6 @@
 package com.example.examine_ai.ui.screens
 
 import android.util.Log
-import android.widget.Spinner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -27,15 +26,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.examine_ai.data.model.Paciente
-import com.example.examine_ai.data.model.User
 import com.example.examine_ai.ui.components.CustomButton
 import com.example.examine_ai.ui.components.GraphicCloud
-import com.example.examine_ai.ui.components.Spinner
 import com.example.examine_ai.ui.presentation.users.AuthenticationState
 import com.example.examine_ai.ui.presentation.users.UserViewModel
 import com.example.examine_ai.ui.themes.CustomColors
@@ -146,7 +141,7 @@ fun LoginScreen(
                 when (loginResult) {
                     is AuthenticationState.Unauthenticated -> { navController.navigate("login") }
                     is AuthenticationState.Authenticating -> {
-                        navController.navigate("spinner")
+//                        navController.navigate("spinner")
                     }
                     is AuthenticationState.Authenticated -> {
                         Log.d("Debug3", loginResult.toString())
@@ -156,9 +151,9 @@ fun LoginScreen(
                         Log.d("Debug4: details", username)
                         Log.d("Debug4: details2", password)
 
-
-                        navController.navigate("homeNL") }
-                    else -> {
+                        navController.navigate("homeNL")
+                    }
+                        else -> {
                         Log.d("Debug", loginResult.toString())
                     }
                 }

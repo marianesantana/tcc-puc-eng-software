@@ -7,12 +7,12 @@ import java.util.Date
 @Entity
 data class Exame(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val tipo: MutableList<TipoExame>,
+    val id: Int = 0,
+    val tipo: TipoExame?,
     val data: Date,
-    val diagnostico: MutableList<Diagnostico?>,
+    val diagnostico: MutableList<Diagnostico?>? = null,
     val imagem: String,
-    val medicoResponsavel: MutableList<Medico>,
+    val medicoResponsavel: MutableList<Medico>? = null,
 )
 
 data class ExameList(val exames: MutableList<Exame>)

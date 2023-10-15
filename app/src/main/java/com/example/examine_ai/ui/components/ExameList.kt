@@ -5,22 +5,25 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavController
 import com.example.examine_ai.data.model.Exame
+import com.example.examine_ai.domain.services.exames.ExamesViewModel
 
 @Composable
-fun ExameList(exames: MutableList<Exame>){
-    val navController = rememberNavController()
-//                navController.navigate("${Destinos.DETALHES_EXAME}/${exame.id}")
+fun ExameList(examesViewModel: ExamesViewModel, navController: NavController){
+    val exames: MutableList<Exame> by examesViewModel.allExames.observeAsState(mutableListOf())
 
     Column {
         Spacer(modifier = Modifier.height(16.dp))
         LazyColumn {
             items(exames.size) { exame ->
                 val index = exames[exame]
-                ExameItem(index)
+                examesViewModel.getExameById(index.id)
+                ExameItem(index, navController)
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }

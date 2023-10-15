@@ -37,7 +37,7 @@ import com.example.examine_ai.data.model.User
                         Consulta::class,
                         HistoricoMedico::class,
                         Receita::class,
-                        Exame::class], version = 5)
+                        Exame::class], version = 8)
 @TypeConverters(HistoricoMedicoTypeConverter::class, MedicamentoTypeConverter::class,
     ConsultaTypeConverter::class, DiagnosticoTypeConverter::class, ExameTypeConverter::class,
     PacienteTypeConverter::class, MedicoTypeConverter::class, DateTypeConverter::class, TipoExameTypeConverter::class)
