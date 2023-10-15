@@ -11,6 +11,9 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE username = :username AND password = :password LIMIT 1")
     suspend fun getUser(username: String, password: String): User?
 
+    @Query("SELECT * FROM user WHERE id = :id LIMIT 1")
+    suspend fun getUserById(id: Int): User?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: User)
 

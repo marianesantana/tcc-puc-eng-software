@@ -29,6 +29,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.examine_ai.data.model.User
 import com.example.examine_ai.ui.components.CustomButton
 import com.example.examine_ai.ui.components.GraphicCloud
@@ -38,14 +39,16 @@ import com.example.examine_ai.ui.themes.customFontFamily
 
 @Composable
 fun NoLoggedHomeScreen(
-    myViewModel: UserViewModel = viewModel()
+    myViewModel: UserViewModel = viewModel(),
+    navController: NavController,
 
-){
+    ){
     var email by remember { mutableStateOf("") }
     var name by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var emailError by remember { mutableStateOf(false) }
     var passwordError by remember { mutableStateOf(false) }
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -171,13 +174,16 @@ fun NoLoggedHomeScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Row(
-            modifier = Modifier.fillMaxWidth().background(Color.Transparent),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Transparent),
             horizontalArrangement = Arrangement.Center
         ) {
             CustomButton(onClick = {
                 val user = User(username = email, password = password)
                 Log.d("DEBUG", user.username)
                 myViewModel.insert(user)
+                navController.navigate("login")
 
             }, label = "Cadastrar")
 

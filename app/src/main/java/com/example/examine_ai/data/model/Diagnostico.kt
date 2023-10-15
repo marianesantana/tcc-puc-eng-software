@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 @Entity
 data class Diagnostico(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val descricao: String,
-    val data: String,
-    val exames: MutableList<Exame>,
-    val paciente: MutableList<Paciente>,
+    val id: Int = 0,
+    val descricao: String ? = null,
+    val data: String ? = null,
+    val exames: MutableList<Exame>? = null,
+    val paciente: MutableList<Paciente>? = null,
 
 )
