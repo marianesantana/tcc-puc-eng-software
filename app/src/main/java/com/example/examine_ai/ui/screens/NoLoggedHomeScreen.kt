@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
@@ -48,6 +50,8 @@ fun NoLoggedHomeScreen(
     var password by remember { mutableStateOf("") }
     var emailError by remember { mutableStateOf(false) }
     var passwordError by remember { mutableStateOf(false) }
+
+    var isDialogShowing: Boolean? = false
 
 
     Column(
@@ -180,13 +184,31 @@ fun NoLoggedHomeScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             CustomButton(onClick = {
+                 isDialogShowing = true
                 val user = User(username = email, password = password)
                 Log.d("DEBUG", user.username)
                 myViewModel.insert(user)
-                navController.navigate("login")
 
             }, label = "Cadastrar")
 
+
+        }
+
+        if(isDialogShowing == true){
+            AlertDialog(onDismissRequest = {
+                isDialogShowing
+            },
+                buttons = {
+                    Button(onClick = {
+                        isDialogShowing = false
+                        navController.navigate("login")
+
+                    }) {
+                        Text(text = "Ok")
+
+                    } }, text = {
+                    Text(text = "Cadastrado com sucesso")
+                })
         }
 
 

@@ -3,16 +3,16 @@ package com.example.examine_ai.ui.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.examine_ai.R
@@ -20,6 +20,7 @@ import com.example.examine_ai.data.model.Exame
 import com.example.examine_ai.data.model.ExameResult
 import com.example.examine_ai.domain.services.exames.ExamesViewModel
 import com.example.examine_ai.domain.utils.dateFormatter
+import com.example.examine_ai.ui.components.SvgImage
 import com.example.examine_ai.ui.themes.CustomColors
 
 @Composable
@@ -28,9 +29,6 @@ fun ExameDetailScreen(
     examesViewModel: ExamesViewModel
 ) {
     val exame = examesViewModel.getExameById(exameId)
-
-
-//    val exames: MutableList<Exame> by examesViewModel.allExames.observeAsState(mutableListOf())
 
 
     if (exame != null) {
@@ -54,18 +52,13 @@ fun DetalhesExameContent(exame: Exame) {
                 .padding(16.dp)
         ) {
             item {
-                Box(
-                    modifier = Modifier
-                        .aspectRatio(1f)
-                        .clip(CircleShape)
-                        .background(CustomColors.secondary)
-                ) {
                     GlideImage(
-                        model = R.drawable.frameimage,
+                        model = R.drawable.ic_exames,
                         contentDescription = "Imagem do Exame",
                         contentScale = ContentScale.Crop,
+                        modifier = Modifier.size(12.dp)
                     )
-                }
+
             }
 
             item {
@@ -123,6 +116,18 @@ fun DetalhesExameContent(exame: Exame) {
                 )
                 exame.diagnostico?.forEach { diagnostico ->
                     val results = diagnostico?.descricao?.let { extractResultsFromText(it) }
+
+                        Row(verticalAlignment = Alignment.CenterVertically){
+                            Text(text = "Converse com um médico sobre o resultado desses exames, \n diagnóstico está em Testes e pode conter informações erradas!",
+                                color = Color.Red,
+                                fontWeight = FontWeight.Bold,
+                                style = MaterialTheme.typography.body1,
+                                fontSize = 16.sp
+                            )
+                            SvgImage(R.drawable.baseline_announcement_24)
+
+                        }
+
 
                   Column {
 
