@@ -2,6 +2,7 @@ package com.example.examine_ai.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -19,7 +20,7 @@ fun ExameList(examesViewModel: ExamesViewModel, navController: NavController){
 
     Column {
         Spacer(modifier = Modifier.height(16.dp))
-        LazyColumn {
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(exames.size) { exame ->
                 val index = exames[exame]
                 examesViewModel.getExameById(index.id)

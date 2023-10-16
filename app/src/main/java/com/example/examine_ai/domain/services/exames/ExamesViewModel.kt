@@ -18,7 +18,9 @@ class ExamesViewModel(application: Application) : AndroidViewModel(application) 
     private val _exameId = MutableLiveData<Int>()
     private val _exame = MutableLiveData<Exame>()
 //    val exame: LiveData<Exame>
+    private val _isDialogVisible = MutableLiveData(false)
 
+    val isDialogVisible: LiveData<Boolean> = _isDialogVisible
 
 
     val exameId: MutableLiveData<Int>

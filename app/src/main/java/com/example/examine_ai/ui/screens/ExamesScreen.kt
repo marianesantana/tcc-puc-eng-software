@@ -96,11 +96,15 @@ fun ExamesScreen(examesViewModel: ExamesViewModel, navController: NavController)
                     }, tipoExames)
 
                 }
-                ExameList(examesViewModel, navController)
+                else {
+                    ExameList(examesViewModel, navController)
+
+                }
 
                 FloatingActionButton(
                     onClick = { isAddingExame = true },
-                    contentColor = Color.White
+                    contentColor = Color.White,
+//                    modifier = Modifier.align(alignment = Alignment.Horizontal)
                 ) {
                     Icon(Icons.Filled.Add,
                         contentDescription = "Adicionar Exame")
